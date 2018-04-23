@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2015.3 (64-bit)
+# SW Build 1368829 on Mon Sep 28 20:06:43 MDT 2015
+# IP Build 1367837 on Mon Sep 28 08:56:14 MDT 2015
+# Start of session at: Mon Apr 23 21:24:57 2018
+# Process ID: 6084
+# Current directory: D:/ECOP/hw2/led_8lights/led_8lights.runs/impl_1
+# Command line: vivado.exe -log led_8lights.vdi -applog -messageDb vivado.pb -mode batch -source led_8lights.tcl -notrace
+# Log file: D:/ECOP/hw2/led_8lights/led_8lights.runs/impl_1/led_8lights.vdi
+# Journal file: D:/ECOP/hw2/led_8lights/led_8lights.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source led_8lights.tcl -notrace
