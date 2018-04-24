@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2015.3 (64-bit)
+# SW Build 1368829 on Mon Sep 28 20:06:43 MDT 2015
+# IP Build 1367837 on Mon Sep 28 08:56:14 MDT 2015
+# Start of session at: Mon Apr 23 21:10:10 2018
+# Process ID: 5392
+# Current directory: D:/ECOP/hw2/led_8lights/led_8lights.sim/sim_1/behav
+# Command line: wbtcv.exe -mode batch -source D:/ECOP/hw2/led_8lights/led_8lights.sim/sim_1/behav/xsim.dir/led_sim_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: D:/ECOP/hw2/led_8lights/led_8lights.sim/sim_1/behav/webtalk.log
+# Journal file: D:/ECOP/hw2/led_8lights/led_8lights.sim/sim_1/behav\webtalk.jou
+#-----------------------------------------------------------
+source D:/ECOP/hw2/led_8lights/led_8lights.sim/sim_1/behav/xsim.dir/led_sim_behav/webtalk/xsim_webtalk.tcl -notrace
