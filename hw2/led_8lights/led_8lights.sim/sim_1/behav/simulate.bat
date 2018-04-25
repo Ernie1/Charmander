@@ -1,5 +1,5 @@
 @echo off
-set xv_path=D:\\Xilinx\\Vivado\\2015.3\\bin
+set xv_path=C:\\Xilinx\\Vivado\\2015.3\\bin
 call %xv_path%/xsim led_sim_behav -key {Behavioral:sim_1:Functional:led_sim} -tclbatch led_sim.tcl -log simulate.log
 if "%errorlevel%"=="0" goto SUCCESS
 if "%errorlevel%"=="1" goto END
