@@ -26,7 +26,7 @@ module PC(
         input Reset,
         input [1:0] PCSrc,
         input [31:0] immediate,
-        input [25:0] addr,
+        input [25:0] address,
         output reg [31:0] Address
     );
     
@@ -36,10 +36,10 @@ module PC(
         else if(PCWre)begin
             case(PCSrc)
                 2'b00:Address<=Address+4;
-                2'b01:Address<=Address+4+(immedia*4);
+                2'b01:Address<=Address+4+(immediate*4);
                 2'b10:begin
                     Address<=Address+4;
-                    Address<={Address[31:28],addr,2'b00};
+                    Address<={Address[31:28],address,2'b00};
                 end
                 default:Address<=0;
             endcase

@@ -29,7 +29,7 @@ module RegisterFile(
     input RegDst,
     input DBDataSrc,
     input [31:0] ALUresult,
-    input [31:0] RDWRDataOut,
+    input [31:0] DataMemoryDataOut,
     output reg [31:0] ReadData1,
     output reg [31:0] ReadData2
     );
@@ -38,7 +38,7 @@ module RegisterFile(
     wire [31:0] WriteData;
 
     assign WriteReg=RegDst?rd:rt;
-    assign WriteData=DBDataSrc?RDWRDataOut:ALUresult;
+    assign WriteData=DBDataSrc?DataMemoryDataOut:ALUresult;
     
     reg [31:0] Register [0:31];
 
@@ -52,7 +52,6 @@ module RegisterFile(
     assign ReadData2=Register[rt];
 
     always@(negedge CLK)begin
-        //0ºÅ¼Ä´æÆ÷²»ÓÃ
         if(RegWre&&WriteReg)
             Register[WriteReg]<=WriteData;
     end
