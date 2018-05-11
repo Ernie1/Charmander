@@ -54,8 +54,8 @@ module SingleCycleCPU(
                  //dataMemory datamemory(clk, result, Out2, _RD, _WR, DMOut);
             DataMemory dataMemory(clk,_RD,_WR,result,Out2,DMOut);
          
-             instructionMemory ins(curPC, InsMemRW, opCode, rs, rt, rd, sa, immediate,addr);
-      
+             //InstructionMemory ins(curPC, InsMemRW, opCode, rs, rt, rd, sa, immediate,addr);
+      InstructionMemory instructionMemory(InsMemRW,curPC,opCode,rs,rt,rd,sa,immediate,addr);
      
              //registerFile registerfile(clk, RegWre, RegDst, rs, rt, rd, DBDataSrc, result, DMOut, Out1, Out2);
       RegisterFile registerFile(clk,RegWre,rs,rt,rd,RegDst,DBDataSrc,result,DMOut,Out1,Out2);

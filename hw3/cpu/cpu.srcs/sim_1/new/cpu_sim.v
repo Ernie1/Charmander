@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2017/11/21 20:23:08
+// Create Date: 2018/05/10 22:41:19
 // Design Name: 
 // Module Name: cpu_sim
 // Project Name: 
@@ -23,30 +23,37 @@
 module cpu_sim(
 
     );
-    reg clk, Reset;
-       
-     wire [5:0] opCode;
-      
-      wire [31:0] Data1, Data2, curPC, Result;
-        
-    SingleCycleCPU cpu(
-            .clk(clk),
-            .Reset(Reset),
-            .opCode(opCode),
-            .Out1(Data1),
-            .Out2(Data2),
-            .curPC(curPC),
-            .result(Result)
-        );
-      
-      always #5 clk = ~clk;
-       
-     initial begin
-          
-      clk = 0;
-            
-    Reset = 0;
-          
-      #10 Reset = 1;
-end
+    
+    reg CLK,Reset;
+    wire [5:0] op;
+    wire [31:0] OUT1,OUT2,pc,result;
+
+//    SingleCycleCPU cpu(
+//        .CLK(CLK),
+//        .Reset(Reset),
+//        .InstructionMemoryOp(op),
+//        .RegisterFileReadData1(OUT1),
+//        .RegisterFileReadData2(OUT2),
+//        .PCAddress(pc),
+//        .ALUResult(result)
+//        );
+            SingleCycleCPU cpu(
+                    .clk(CLK),
+                    .Reset(Reset),
+                    .opCode(op),
+                    .Out1(OUT1),
+                    .Out2(OUT2),
+                    .curPC(pc),
+                    .result(result)
+                );
+
+    always #5 CLK=~CLK; // ????? 10ns
+
+    initial begin
+        CLK=0;
+        Reset=0;
+
+        #10 Reset=1; // ?? 10ns ??????????
+    end
+
 endmodule

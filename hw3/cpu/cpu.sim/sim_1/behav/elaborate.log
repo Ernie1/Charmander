@@ -11,7 +11,7 @@ Compiling module xil_defaultlib.ALU
 Compiling module xil_defaultlib.PC
 Compiling module xil_defaultlib.ControlUnit
 Compiling module xil_defaultlib.DataMemory
-Compiling module xil_defaultlib.instructionMemory
+Compiling module xil_defaultlib.InstructionMemory
 Compiling module xil_defaultlib.RegisterFile
 Compiling module xil_defaultlib.SignZeroExtend
 Compiling module xil_defaultlib.SingleCycleCPU

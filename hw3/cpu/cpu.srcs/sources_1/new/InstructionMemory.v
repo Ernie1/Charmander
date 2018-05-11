@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2017/11/21 20:02:20
+// Create Date: 2018/05/10 10:38:54
 // Design Name: 
-// Module Name: instructionMemory
+// Module Name: InstructionMemory
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,188 +20,64 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module instructionMemory(
-    input [31:0] pc,
+module InstructionMemory(
     input InsMemRW,
-    output [5:0] op,
+    input [31:0] IAddr,
+    output  [5:0] op,
     output [4:0] rs,
     output [4:0] rt,
     output [4:0] rd,
-    output [4:0] shAmount,
+    output [4:0] sa,
     output [15:0] immediate,
-    output [25:0] addr
+    output [25:0] address
     );
-    wire [7:0] mem[0:75];
-    
-         
-         //addi $1,$0,8
-         assign mem[0] = 8'b00000100;
-    
-         assign mem[1] = 8'b00000001;
-    
-         assign mem[2] = 8'b00000000;
-    
-         assign mem[3] = 8'b00001000;
-    
-         //ori $1,$0,2
-    
-         assign mem[4] = 8'b01000000;
-    
-         assign mem[5] = 8'b00000010;
-    
-         assign mem[6] = 8'b00000000;
-    
-         assign mem[7] = 8'b00000010;
-    
-         //add $3,$2,$1
-    
-         assign mem[8] = 8'b00000000;
-    
-         assign mem[9] = 8'b01000001;
-    
-         assign mem[10] = 8'b00011000;
-    
-         assign mem[11] = 8'b00000000;
-    
-         //sub $5,$3,$2
-    
-         assign mem[12] = 8'b00001000;
-    
-         assign mem[13] = 8'b01100010;
-    
-         assign mem[14] = 8'b00101000;
-    
-         assign mem[15] = 8'b00000000;
-    
-         //and $4,$5,$2
-         assign mem[16] = 8'b01000100;
-    
-         assign mem[17] = 8'b10100010;
-    
-         assign mem[18] = 8'b00100000;
-    
-         assign mem[19] = 8'b00000000;
-    
-         //or $8,$4,$2
-         assign mem[20] = 8'b01001000;
-    
-         assign mem[21] = 8'b10000010;
-    
-         assign mem[22] = 8'b01000000;
-    
-         assign mem[23] = 8'b00000000;
-    
-         //sll $8,$8,1
-         assign mem[24] = 8'b01100000;
-    
-         assign mem[25] = 8'b00001000;
-    
-         assign mem[26] = 8'b01000000;
-    
-         assign mem[27] = 8'b01000000;
-    
-         //bne $8,$1,-2
-         assign mem[28] = 8'b11000101;
-    
-         assign mem[29] = 8'b00000001;
-   
-         assign mem[30] = 8'b11111111;
-    
-         assign mem[31] = 8'b11111110;
-    
-         //slt $6,$2,$1
-         assign mem[32] = 8'b01110000;
-    
-         assign mem[33] = 8'b01000001;
-    
-         assign mem[34] = 8'b00110000;
-    
-         assign mem[35] = 8'b00000000;
-    
-         //slt $7,$6,$0
-         assign mem[36] = 8'b01110000;
-    
-         assign mem[37] = 8'b11000000;
-    
-         assign mem[38] = 8'b00111000;
-    
-         assign mem[39] = 8'b00000000;
-    
-         //addi $7,$7,8
-         assign mem[40] = 8'b00000100;
-    
-         assign mem[41] = 8'b11100111;
-    
-         assign mem[42] = 8'b00000000;
-    
-         assign mem[43] = 8'b00001000;
-    
-         //beq $7,$1,-2
-         assign mem[44] = 8'b11000000;
-    
-         assign mem[45] = 8'b11100001;
-    
-         assign mem[46] = 8'b11111111;
-    
-         assign mem[47] = 8'b11111110;
-    
-         //sw $2,4($1)
-         assign mem[48] = 8'b10011000;
-    
-         assign mem[49] = 8'b00100010;
-    
-         assign mem[50] = 8'b00000000;
-    
-         assign mem[51] = 8'b00000100;
-    
-         //lw $9,4($1)
-         assign mem[52] = 8'b10011100;
-    
-         assign mem[53] = 8'b00101001;
-    
-         assign mem[54] = 8'b00000000;
-    
-         assign mem[55] = 8'b00000100;
-    
-         //bgtz $9,1
-         assign mem[56] = 8'b11001001;
-    
-         assign mem[57] = 8'b00100000;
-    
-         assign mem[58] = 8'b00000000;
-    
-         assign mem[59] = 8'b00000001;
-    
-         //halt
-         assign mem[60] = 8'b11111100;
-         assign mem[61] = 8'b00000000;
-         assign mem[62] = 8'b00000000;
-         assign mem[63] = 8'b00000000;
-         //addi $9,$0,-1
-         assign mem[64] = 8'b00000100;
-         assign mem[65] = 8'b00001001;
-         assign mem[66] = 8'b11111111;
-         assign mem[67] = 8'b11111111;
-         //j 0x00000038
-         assign mem[68] = 8'b11100000;
-         assign mem[69] = 8'b00000000;
-         assign mem[70] = 8'b00000000;
-         assign mem[71] = 8'b00001110;
-         
-         // output
-      
-         
-    assign op = mem[pc[6:2]*4][7:2];
-      
-         assign rs = {mem[pc[6:2]*4][1:0], mem[pc[6:2]*4+1][7:5]};
-    
-           assign rt = mem[pc[6:2]*4+1][4:0];
-      
-         assign rd = mem[pc[6:2]*4+2][7:3];
-     
-          assign immediate = {mem[pc[6:2]*4+2][7:0],mem[pc[6:2]*4+3][7:0]};
-    
-           assign shAmount = {mem[pc[6:2]*4+2][2:0], mem[pc[6:2]*4+3][7:6]};
-    
-           assign addr = {mem[pc[6:2]*4][1:0],mem[pc[6:2]*4+1][7:0],mem[pc[6:2]*4+2][7:0],mem[pc[6:2]*4+3][7:0]};
+
+    reg [31:0] Instruction [0:19];
+
+    initial begin
+        //addi  $1,$0,8
+        Instruction[0]=32'b00000100000000010000000000001000;
+        //ori  $2,$0,2
+        Instruction[1]=32'b01000000000000100000000000000010;
+        //add  $3,$2,$1
+        Instruction[2]=32'b00000000010000010001100000000000;
+        //sub  $5,$3,$2
+        Instruction[3]=32'b00001000011000100010100000000000;
+        //and  $4,$5,$2
+        Instruction[4]=32'b01000100101000100010000000000000;
+        //or  $8,$4,$2
+        Instruction[5]=32'b01001000100000100100000000000000;
+        //sll  $8,$8,1
+        Instruction[6]=32'b01100000000010000100000001000000;
+        //bne  $8,$1,-2 (??,?18)
+        Instruction[7]=32'b11000101000000011111111111111110;
+        //slti  $6,$2,8
+        Instruction[8]=32'b01101100010001100000000000001000;
+        //slti  $7,$6,0
+        Instruction[9]=32'b01101100110001110000000000000000;
+        //addi $7,$7,8
+        Instruction[10]=32'b00000100111001110000000000001000;
+        //beq $7,$1,-2 (=,?28)
+        Instruction[11]=32'b11000000111000011111111111111110;
+        //sw  $2,4($1)
+        Instruction[12]=32'b10011000001000100000000000000100;
+        //lw  $9,4($1)
+        Instruction[13]=32'b10011100001010010000000000000100;
+        //j  0x00000040
+        Instruction[14]=32'b11100000000000000000000000010000;
+        //addi  $10,$0,10
+        Instruction[15]=32'b00000100000010100000000000001010;
+        //halt
+        Instruction[16]=32'b11111100000000000000000000000000;
+    end
+
+    //???›¥????§Õ?????????0§Õ???1??????????????§Õ
+        assign op=Instruction[IAddr>>2][31:26];
+        assign rs=Instruction[IAddr>>2][25:21];
+        assign rt=Instruction[IAddr>>2][20:16];
+        assign rd=Instruction[IAddr>>2][15:11];
+        assign sa=Instruction[IAddr>>2][10:6];
+        assign immediate=Instruction[IAddr>>2][15:0];
+        assign address=Instruction[IAddr>>2][25:0];
+
 endmodule
