@@ -29,19 +29,23 @@ module DataMemory(
     output [31:0] DataOut
     );
 
-    reg [31:0] Data [0:31];
+    reg [7:0] Data [0:127];
     
     integer i;
     initial begin
-        for (i=0;i<32;i=i+1)
+        for (i=0;i<127;i=i+1)
             Data[i]<=0;
     end
 
-    assign DataOut=(!nRD)?Data[DAddr]:32'bz; // z 为高阻态
-
+    assign DataOut=(!nRD)?{Data[DAddr<<2+3],Data[DAddr<<2+2],Data[DAddr<<2+1],Data[DAddr<<2]}:32'bz; // z 为高阻态
+ 
     always@(negedge CLK)begin
-        if(!nWR)
-            Data[DAddr]<=DataIn;
+        if(!nWR)begin
+            Data[DAddr<<2+3]=DataIn[31:24];
+            Data[DAddr<<2+2]=DataIn[23:16];
+            Data[DAddr<<2+1]=DataIn[15:8];
+            Data[DAddr<<2]=DataIn[7:0];
+        end
     end
     
 endmodule
