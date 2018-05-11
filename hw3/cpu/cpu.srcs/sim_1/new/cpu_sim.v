@@ -28,32 +28,23 @@ module cpu_sim(
     wire [5:0] op;
     wire [31:0] OUT1,OUT2,pc,result;
 
-//    SingleCycleCPU cpu(
-//        .CLK(CLK),
-//        .Reset(Reset),
-//        .InstructionMemoryOp(op),
-//        .RegisterFileReadData1(OUT1),
-//        .RegisterFileReadData2(OUT2),
-//        .PCAddress(pc),
-//        .ALUResult(result)
-//        );
-            SingleCycleCPU cpu(
-                    .clk(CLK),
-                    .Reset(Reset),
-                    .opCode(op),
-                    .Out1(OUT1),
-                    .Out2(OUT2),
-                    .curPC(pc),
-                    .result(result)
-                );
+    SingleCycleCPU cpu(
+        .CLK(CLK),
+        .Reset(Reset),
+        .InstructionMemoryOp(op),
+        .RegisterFileReadData1(OUT1),
+        .RegisterFileReadData2(OUT2),
+        .PCAddress(pc),
+        .ALUResult(result)
+        );
 
-    always #5 CLK=~CLK; // ????? 10ns
+    always #5 CLK=~CLK;  // 周期为 10ns
 
     initial begin
         CLK=0;
         Reset=0;
 
-        #10 Reset=1; // ?? 10ns ??????????
+        #10 Reset=1;  // 从 10ns 开始仿真输出
     end
 
 endmodule

@@ -37,7 +37,7 @@ module DataMemory(
             Data[i]<=0;
     end
 
-    assign DataOut=(!nRD)?Data[DAddr]:32'bz; //????????
+    assign DataOut=(!nRD)?Data[DAddr]:32'bz; // z Îª¸ß×èÌ¬
 
     always@(negedge CLK)begin
         if(!nWR)

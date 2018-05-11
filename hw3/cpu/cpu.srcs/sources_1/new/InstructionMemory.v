@@ -71,7 +71,7 @@ module InstructionMemory(
         Instruction[16]=32'b11111100000000000000000000000000;
     end
 
-    //???洢????д?????????0д???1??????????????д
+        //指令存储器读写控制信号InsMemRW，为0写，为1读，这里暂不实现写，所以忽略InsMemRW
         assign op=Instruction[IAddr>>2][31:26];
         assign rs=Instruction[IAddr>>2][25:21];
         assign rt=Instruction[IAddr>>2][20:16];

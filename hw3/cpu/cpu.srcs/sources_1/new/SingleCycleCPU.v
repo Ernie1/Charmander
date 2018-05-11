@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2017/11/21 21:38:17
+// Create Date: 2018/05/10 17:50:44
 // Design Name: 
 // Module Name: SingleCycleCPU
 // Project Name: 
@@ -21,45 +21,29 @@
 
 
 module SingleCycleCPU(
-    input clk,
+    input CLK,
     input Reset,
-    output wire [5:0] opCode,
-    output wire [31:0] Out1,
-    output wire [31:0] Out2,
-    output wire [31:0] curPC,
-    output wire [31:0] result
+    output wire [5:0] InstructionMemoryOp,
+    output wire [31:0] RegisterFileReadData1,
+    output wire [31:0] RegisterFileReadData2,
+    output wire [31:0] PCAddress,
+    output wire [31:0] ALUResult
     );
-    wire [2:0] ALUOp;
-      
-                 wire [31:0] ExtOut, DMOut;
-      
-                 wire [15:0] immediate;
-      
-                 wire [4:0] rs, rt, rd, sa;
-                 wire [25:0] addr;
-     wire [1:0] PCSrc;
-                 wire zero, PCWre, ALUSrcA, ALUSrcB, DBDataSrc, RegWre, InsMemRW, _RD, _WR, ExtSel, RegDst;
-      
-         
-             //ALU alu(Out1, Out2, ExtOut, sa, ALUSrcA, ALUSrcB, ALUOp, zero, result);
-             ALU alu(ALUOp,ALUSrcA,ALUSrcB,sa,Out1, Out2,ExtOut, zero, result);
 
-    
-                //PC pc(clk, Reset, PCWre, PCSrc, ExtOut, addr,curPC);
-                PC pc(PCWre,clk,Reset,PCSrc, ExtOut, addr,curPC);
-    
-                 //controlUnit control(opCode, zero, PCWre, ALUSrcA, ALUSrcB, RegWre, InsMemRW, ExtSel, PCSrc, RegDst, _RD, _WR, DBDataSrc, ALUOp);
-      ControlUnit controlUnit(opCode,zero,InsMemRW,PCWre,ExtSel,DBDataSrc,_WR,_RD,ALUSrcB,ALUSrcA,PCSrc,ALUOp,RegWre,RegDst);
-    
-                 //dataMemory datamemory(clk, result, Out2, _RD, _WR, DMOut);
-            DataMemory dataMemory(clk,_RD,_WR,result,Out2,DMOut);
+    wire [31:0] ext,DataMemoryDataOut;
+    wire [25:0] address;
+    wire [15:0] immediate;
+    wire [4:0] sa,rs,rt,rd;
+    wire [2:0] ALUOp;
+    wire [1:0] PCSrc;
+    wire ALUSrcA,ALUSrcB,zero,InsMemRW,PCWre,ExtSel,DBDataSrc,nWR,nRD,RegWre,RegDst;
          
-             //InstructionMemory ins(curPC, InsMemRW, opCode, rs, rt, rd, sa, immediate,addr);
-      InstructionMemory instructionMemory(InsMemRW,curPC,opCode,rs,rt,rd,sa,immediate,addr);
-     
-             //registerFile registerfile(clk, RegWre, RegDst, rs, rt, rd, DBDataSrc, result, DMOut, Out1, Out2);
-      RegisterFile registerFile(clk,RegWre,rs,rt,rd,RegDst,DBDataSrc,result,DMOut,Out1,Out2);
-    
-                 //signZeroExtend ext(immediate, ExtSel, ExtOut);
-                 SignZeroExtend signZeroExtend(immediate,ExtSel,ExtOut);
+    ALU alu(ALUOp,ALUSrcA,ALUSrcB,sa,RegisterFileReadData1, RegisterFileReadData2,ext, zero, ALUResult);
+    PC pc(PCWre,CLK,Reset,PCSrc, ext, address,PCAddress);
+    ControlUnit controlUnit(InstructionMemoryOp,zero,InsMemRW,PCWre,ExtSel,DBDataSrc,nWR,nRD,ALUSrcB,ALUSrcA,PCSrc,ALUOp,RegWre,RegDst);
+    DataMemory dataMemory(CLK,nRD,nWR,ALUResult,RegisterFileReadData2,DataMemoryDataOut);
+    InstructionMemory instructionMemory(InsMemRW,PCAddress,InstructionMemoryOp,rs,rt,rd,sa,immediate,address);
+    RegisterFile registerFile(CLK,RegWre,rs,rt,rd,RegDst,DBDataSrc,ALUResult,DataMemoryDataOut,RegisterFileReadData1,RegisterFileReadData2);
+    SignZeroExtend signZeroExtend(immediate,ExtSel,ext);
+
 endmodule
