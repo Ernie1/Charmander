@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2015.3 (64-bit)
+# SW Build 1368829 on Mon Sep 28 20:06:43 MDT 2015
+# IP Build 1367837 on Mon Sep 28 08:56:14 MDT 2015
+# Start of session at: Fri May 11 10:58:27 2018
+# Process ID: 11484
+# Current directory: Y:/ECOP/hw3/cpu
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent2436 Y:\ECOP\hw3\cpu\cpu.xpr
+# Log file: Y:/ECOP/hw3/cpu/vivado.log
+# Journal file: Y:/ECOP/hw3/cpu\vivado.jou
+#-----------------------------------------------------------
+start_gui

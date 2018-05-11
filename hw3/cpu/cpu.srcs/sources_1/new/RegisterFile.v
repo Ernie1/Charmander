@@ -30,8 +30,8 @@ module RegisterFile(
     input DBDataSrc,
     input [31:0] ALUresult,
     input [31:0] DataMemoryDataOut,
-    output reg [31:0] ReadData1,
-    output reg [31:0] ReadData2
+    output [31:0] ReadData1,
+    output [31:0] ReadData2
     );
 
     wire [31:0] WriteReg;
@@ -42,8 +42,8 @@ module RegisterFile(
     
     reg [31:0] Register [0:31];
 
+    integer i;
     initial begin
-        integer i;
         for (i=0;i<32;i=i+1)
             Register[i]<=0;
     end

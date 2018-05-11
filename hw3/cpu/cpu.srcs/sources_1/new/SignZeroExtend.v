@@ -23,7 +23,7 @@
 module SignZeroExtend(
     input [15:0] immediate,
     input ExtSel,
-    output reg [31:0] ext
+    output [31:0] ext
     );
 
     assign ext[15:0]=immediate;

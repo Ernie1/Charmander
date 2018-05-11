@@ -26,18 +26,18 @@ module DataMemory(
     input nWR,
     input [31:0] DAddr,
     input [31:0] DataIn,
-    output reg [31:0] DataOut
+    output [31:0] DataOut
     );
 
     reg [31:0] Data [0:31];
-
+    
+    integer i;
     initial begin
-        integer i;
         for (i=0;i<32;i=i+1)
             Data[i]<=0;
     end
 
-    assign DataOut=(!nRD)?Data[DAddr]:32'hzzzzzzzz; //Êä³ö¸ß×èÌ¬
+    assign DataOut=(!nRD)?Data[DAddr]:32'bz; //????????
 
     always@(negedge CLK)begin
         if(!nWR)
