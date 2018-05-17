@@ -47,12 +47,15 @@ module RegisterFile(
         for (i=0;i<32;i=i+1)
             Register[i]<=0;
     end
-
+    
+    //¶ÁÈ¡
     assign ReadData1=Register[rs];
     assign ReadData2=Register[rt];
-
+    
+    //Ð´Èë
     always@(negedge CLK)begin
         if(RegWre&&WriteReg)
             Register[WriteReg]<=WriteData;
     end
+    
 endmodule

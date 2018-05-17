@@ -29,7 +29,7 @@ module DataMemory(
     output [31:0] DataOut
     );
 
-    reg [7:0] Data [0:127];
+    reg [7:0] Data [0:63];
     
     integer i;
     initial begin

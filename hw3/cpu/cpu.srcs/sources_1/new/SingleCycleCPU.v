@@ -23,11 +23,11 @@
 module SingleCycleCPU(
     input CLK,
     input Reset,
-    output wire [5:0] InstructionMemoryOp,
-    output wire [31:0] RegisterFileReadData1,
-    output wire [31:0] RegisterFileReadData2,
-    output wire [31:0] PCAddress,
-    output wire [31:0] ALUResult
+    output [5:0] InstructionMemoryOp,
+    output [31:0] RegisterFileReadData1,
+    output [31:0] RegisterFileReadData2,
+    output [31:0] PCAddress,
+    output [31:0] ALUResult
     );
 
     wire [31:0] ext,DataMemoryDataOut;

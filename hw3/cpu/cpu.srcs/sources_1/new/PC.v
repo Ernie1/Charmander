@@ -35,13 +35,13 @@ module PC(
             Address<=0;
         else if(PCWre)begin
             case(PCSrc)
-                2'b00:Address<=Address+4;
-                2'b01:Address<=Address+4+(immediate*4);
-                2'b10:begin
+                2'b00:Address<=Address+4;// pc<£­pc+4
+                2'b01:Address<=Address+4+(immediate*4);// pc<£­pc+4+immediate*4
+                2'b10:begin    //pc<£­{(pc+4)[31:28],addr[27:2],2{0}}
                     Address<=Address+4;
-                    Address<={Address[31:28],address,2'b00};
-                end
-                default:Address<=0;
+                     Address<={Address[31:28],address,2'b00};
+                 end
+                 default:Address<=0;
             endcase
         end
     end

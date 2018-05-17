@@ -42,7 +42,7 @@ module ALU(
     assign A=ALUSrcA?saExt:ReadData1;
     assign B=ALUSrcB?ext:ReadData2;
 
-    always@(ALUOp or ALUSrcA or ALUSrcB or ReadData1 or ReadData2 or ext)begin
+    always@(ALUOp or ALUSrcA or ALUSrcB or ReadData1 or ReadData2 or ext or A or B)begin
         case(ALUOp)
             3'b000:result=A+B;
             3'b001:result=A-B;
