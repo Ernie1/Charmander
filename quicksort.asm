@@ -1,154 +1,138 @@
-data segment
+DATA        SEGMENT
+;int array[] = {28, 44, 22, 7, 42, -15, 35, 6, 43, 20};
+ARR         DW     28, 44, 22, 7, 42, -15, 35, 6, 43, 20
+DATA        ENDS
 
-    ;-----------------------------------------
-    ;ARRAY OF 50 INTEGERS.
-    arr dw 28, 44, 22, 7, 42, -15, 35, 6, 43, 20
-    ;-----------------------------------------
+CODE        SEGMENT
+            ASSUME CS: CODE, DS: DATA
 
-    
+START:      MOV    AX, DATA
+            MOV    DS, AX
 
-ends
+            ;recursion(array, 0, 9);
+            MOV    BX, 0
+            MOV    CX, 9
+            CALL   RECURSION
+            
+            ;terminated
+            MOV    AX, 4C00H
+            INT    21H
 
-code segment
+;recursion(int array[], int left, int right)
+;AX pivot, BX left, CX right
+RECURSION   PROC
 
-    assume cs: code, ds: data
-
-    start:
-
-        ;INITIALIZE DATA SEGMENT.
-        mov  ax, data
-        mov  ds, ax
-
-        ;CALL RECURSION(A, 0, A.LENGTH-1).
-        mov bx, 0
-        mov cx, 9
-        call recursion
-       
-
-        ;FINISH PROGRAM.
-        mov  ax, 4c00h
-        int  21h
-
-        ;-----------------------------------------
-        ;RECURSION(A, p, r)
-        ;    if p < r
-        ;        q = RECURSION(A, p, r)
-        ;        RECURSION(A, p, q-1)
-        ;        RECURSION(A, q+1, r)
-
-        recursion proc
-
-            cmp bx, cx  ;if (left < right)
-            jge ret1
+            ;if (left < right)
+            CMP    BX, CX
+            JGE    RET1
              
+            ;int pivot = quicksort(array, left, right);
+            PUSH   CX
+            PUSH   BX
+            CALL   QUICKSORT
             
-            push cx
-            push bx
-            call quicksort  ;int pivot(ax) = quicksort(array, left, right);
+            ;recursion(array, left, pivot - 1);
+            POP    BX
+            PUSH   AX
+            MOV    CX, AX
+            DEC    CX
+            CALL   RECURSION
+
+            ;recursion(array, pivot + 1, right);
+            POP    AX
+            POP    CX
+            MOV    BX, AX
+            INC    BX
+            CALL   RECURSION
+
+RET1:       RET
+RECURSION   ENDP
+
+;int quicksort(int array[], int left, int right)
+;AX pivot, BX left, CX right
+QUICKSORT   PROC
+
+            ;int pivot = left;
+            MOV    AX, BX
+
+;while (right > left)
+WHILE1:     CMP    BX, CX
+            JB     WHILE2
+
+            ;return pivot
+            RET
+
+;while (right > pivot)
+WHILE2:     CMP    AX, CX
+            JAE    WHILE3
+
+            ;if (array[right] >= array[pivot])
+            MOV    SI, AX
+            SHL    SI, 1
+            MOV    DX, [ SI ]
+            MOV    SI, CX
+            SHL    SI, 1
+            CMP    DX, [ SI ]
+            JG     ELSE2
+
+            ;--right;
+            DEC    CX
+            JMP    WHILE2
+
+;else
+ELSE2:      ;swap(array, pivot, right);
+            MOV    SI, AX
+            SHL    SI, 1
+            MOV    DX, [ SI ]
+            MOV    SI, CX
+            SHL    SI, 1
+            XCHG   DX, [ SI ]
+            MOV    SI, AX
+            SHL    SI, 1
+            MOV    [ SI ], DX
+
+            ;pivot = right
+            MOV    AX, CX
             
-            pop bx
-            push ax
-            mov cx, ax
-            dec cx
-            call recursion
+            ;break
 
-            pop ax
-            pop cx
-            mov bx, ax
-            inc bx
-            call recursion
+;while (left < pivot)
+WHILE3:     CMP    BX, AX
+            JGE    WHILE1
 
-            ret1:
-            ret
+            ;if (array[left] <= array[pivot])
+            MOV    SI, BX
+            SHL    SI, 1
+            MOV    DX, [ SI ]
+            MOV    SI, AX
+            SHL    SI, 1
+            CMP    DX, [ SI ]
+            JG     ELSE3
 
-                   
+            ;++left
+            INC    BX
+            JMP    WHILE3
 
-        recursion endp
+;else
+ELSE3:      ;swap(array, left, pivot)
+            MOV    SI, BX
+            SHL    SI, 1
+            MOV    DX, [ SI ]
+            MOV    SI, AX
+            SHL    SI, 1
+            XCHG   DX, [ SI ]
+            MOV    SI, BX
+            SHL    SI, 1
+            MOV    [ SI ], DX 
 
-        ;-----------------------------------------
-        ;QUICKSORT(A, p, r)
-        ;    x = A[r]
-        ;    i = p - 1
-        ;    for j = p to r-1
-        ;        if A[j] ≤ x
-        ;            i = i + 1
-        ;            exchange A[i] with A[j]
-        ;    exchange A[i+1] with A[r]
-        ;    return i+1
+            ;pivot = left
+            MOV    AX, BX
 
-        quicksort proc
+            ;break
+            JMP    WHILE1
 
-            ;p   q     r
-;left pivot right
-;bx  ax    cx
-
-; mov bx, p
-; mov cx, r
-
-mov ax, bx; int pivot = left;
-;q pivot
-
-while1:
-cmp bx, cx;     while (left < right)
-jb while2
-ret ;     return pivot;
-
-while2:
-cmp ax, cx  ;while (pivot < right)
-jae while3
-
-mov si, ax  ;if (array[pivot] <= array[right])
-shl si, 1
-mov dx, [ si ]
-mov si, cx
-shl si, 1
-cmp dx, [ si ]
-jg else2
-dec cx   ;right--;
-jmp while2
-
-else2:
-mov si, ax
-shl si, 1
-mov dx, [ si ] ;array_swap(array, pivot, right);
-mov si, cx
-shl si, 1
-xchg dx, [ si ]
-mov si, ax
-shl si, 1
-mov [ si ], dx 
-mov ax, cx  ;pivot = right;
-;break;
-
-while3:
-cmp bx, ax  ;while (left < pivot)
-jge while1
-
-mov si, bx  ;if (array[left] <= array[pivot])
-shl si, 1
-mov dx, [ si ]
-mov si, ax
-shl si, 1
-cmp dx, [ si ]
-jg else3
-inc bx   ;left++;
-jmp while3
-
-else3:
-mov si, bx ;array_swap(array, left, pivot);
-shl si, 1
-mov dx, [ si ]
-mov si, ax
-shl si, 1
-xchg dx, [ si ]
-mov si, bx
-shl si, 1
-mov [ si ], dx 
-mov ax, bx  ;pivot = left;
-jmp while1  ;break;
-
-        quicksort endp
+QUICKSORT ENDP
     
-ends
-
-    end start
+CODE        ENDS
+            
+            END    START
