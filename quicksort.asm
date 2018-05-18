@@ -5,12 +5,7 @@ data segment
     arr dw 28, 44, 22, 7, 42, -15, 35, 6, 43, 20
     ;-----------------------------------------
 
-    i   dw  ? 
-    j   dw  ?
-    p   dw  0                           ;START OF THE ARRAY, EQUALS TO 0.
-    r   dw  9                          ;END OF THE ARRAY, EQUALS TO A.LENGTH - 1.
-    q   dw  ?
-    x   dw  ?
+    
 
 ends
 
@@ -24,61 +19,54 @@ code segment
         mov  ax, data
         mov  ds, ax
 
-        ;CALL QUICKSORT(A, 0, A.LENGTH-1).
-        call quicksort
-
-        ;WAIT FOR ANY KEY.
-        mov  ah, 7
-        int  21h
+        ;CALL RECURSION(A, 0, A.LENGTH-1).
+        mov bx, 0
+        mov cx, 9
+        call recursion
+       
 
         ;FINISH PROGRAM.
         mov  ax, 4c00h
         int  21h
 
         ;-----------------------------------------
-        ;QUICKSORT(A, p, r)
+        ;RECURSION(A, p, r)
         ;    if p < r
-        ;        q = QUICKSORT(A, p, r)
-        ;        QUICKSORT(A, p, q-1)
-        ;        QUICKSORT(A, q+1, r)
+        ;        q = RECURSION(A, p, r)
+        ;        RECURSION(A, p, q-1)
+        ;        RECURSION(A, q+1, r)
 
-        quicksort proc
+        recursion proc
 
-            ;COMPARE P WITH R.
-            mov  ax, p 
-            cmp  ax, r                  ;COMPARE P WITH R
-            jge  bigger1                ;IF P ≥ R, SORT IS DONE.
-
-            ;CALL PARTITION(A, P, R).
-            call partition
-
-            ;GET Q = PARTITION(A, P, R).
-            mov  q, ax
-
-            ;PUSH Q+1, R INTO STACK FOR LATER USAGE.
-            inc  ax
+            cmp bx, cx  ;if (left < right)
+            jge ret1
+             
+            
+            push cx
+            push bx
+            call quicksort  ;int pivot(ax) = quicksort(array, left, right);
+            
+            pop bx
             push ax
-            push r
+            mov cx, ax
+            dec cx
+            call recursion
 
-            ;CALL QUICKSORT(A, P, Q-1).
-            mov  ax, q
-            mov  r, ax
-            dec  r
-            call quicksort
+            pop ax
+            pop cx
+            mov bx, ax
+            inc bx
+            call recursion
 
-            ;CALL QUICKSORT(A, Q+1, R).
-            pop  r
-            pop  p 
-            call quicksort 
+            ret1:
+            ret
 
-            ;WHEN SORT IS DONE.
-            bigger1:
-                ret
+                   
 
-        quicksort endp
+        recursion endp
 
         ;-----------------------------------------
-        ;PARTITION(A, p, r)
+        ;QUICKSORT(A, p, r)
         ;    x = A[r]
         ;    i = p - 1
         ;    for j = p to r-1
@@ -88,66 +76,66 @@ code segment
         ;    exchange A[i+1] with A[r]
         ;    return i+1
 
-        partition proc
+        quicksort proc
 
             ;p   q     r
-;low pivot high
+;left pivot right
 ;bx  ax    cx
 
-mov bx, p
-mov cx, r
+; mov bx, p
+; mov cx, r
 
-;mov q, ax; int pivot = low;
+mov ax, bx; int pivot = left;
 ;q pivot
 
 while1:
-cmp bx, cx;     while (low < hight)
-jl while2
+cmp bx, cx;     while (left < right)
+jb while2
 ret ;     return pivot;
 
 while2:
-cmp ax, cx  ;while (pivot < hight)
-jge while3
+cmp ax, cx  ;while (pivot < right)
+jae while3
 
-mov si, ax  ;if (array[pivot] <= array[hight])
+mov si, ax  ;if (array[pivot] <= array[right])
 shl si, 1
 mov dx, [ si ]
 mov si, cx
 shl si, 1
 cmp dx, [ si ]
 jg else2
-dec cx   ;hight--;
+dec cx   ;right--;
 jmp while2
 
 else2:
 mov si, ax
 shl si, 1
-mov dx, [ si ] ;array_swap(array, pivot, hight);
+mov dx, [ si ] ;array_swap(array, pivot, right);
 mov si, cx
 shl si, 1
 xchg dx, [ si ]
 mov si, ax
 shl si, 1
 mov [ si ], dx 
-mov ax, cx  ;pivot = hight;
+mov ax, cx  ;pivot = right;
 ;break;
 
 while3:
-cmp bx, ax  ;while (low < pivot)
+cmp bx, ax  ;while (left < pivot)
 jge while1
 
-mov si, bx  ;if (array[low] <= array[pivot])
+mov si, bx  ;if (array[left] <= array[pivot])
 shl si, 1
 mov dx, [ si ]
 mov si, ax
 shl si, 1
 cmp dx, [ si ]
 jg else3
-inc bx   ;low++;
+inc bx   ;left++;
 jmp while3
 
 else3:
-mov si, bx ;array_swap(array, low, pivot);
+mov si, bx ;array_swap(array, left, pivot);
 shl si, 1
 mov dx, [ si ]
 mov si, ax
@@ -156,10 +144,10 @@ xchg dx, [ si ]
 mov si, bx
 shl si, 1
 mov [ si ], dx 
-mov ax, bx  ;pivot = low;
+mov ax, bx  ;pivot = left;
 jmp while1  ;break;
 
-        partition endp
+        quicksort endp
     
 ends
 
