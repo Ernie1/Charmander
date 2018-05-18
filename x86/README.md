@@ -417,11 +417,11 @@ CODE        ENDS
             END    START
 ```
 ### 结果
-![](start_shoot.png){:height="50%" width="50%"}
+![](start_shoot.png)
 
 运行开始时，数据为 {28, 44, 22, 7, 42, -15, 35, 6, 43, 20}
 
-![](result_shoot.png){:height="50%" width="50%"}
+![](result_shoot.png)
 
 运行结束时，数据为 {-15, 6, 7, 20, 22, 28, 35, 42, 43, 44}
 
