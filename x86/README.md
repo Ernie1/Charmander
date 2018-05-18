@@ -3,7 +3,7 @@
 ### 指令系统
 设一存储区中存放有10个带符号的单字节数，现要求分别求出其绝对值后存放到原单元中。
 
-```avrasm
+```x86asm
 DATA    SEGMENT
         BLOCK   DB -10,15H,20H,-1,-23,46H,16H,-33,65H,88H
         DATA    ENDS
@@ -29,7 +29,7 @@ CODE    ENDS
 
 比较两个字符串 MESS1 和 MESS2 所含字符是否完全相同，若相同则显示‘MATCH’，若不同则显示‘NO MATCH’ 。
 
-```avrasm
+```x86asm
 DATA     SEGMENT
 MESS1    DB   'I AM A TEACHER.'
 MESS2    DB   'I AM A TEACHAR.'
@@ -64,7 +64,7 @@ CODE     ENDS
 ### 汇编语言编程
 将一组有符号存储字节数据按从小到大的顺序排列。设数组变量为VAR，数组元素个数为 N。
 
-```avrasm
+```x86asm
     D       SEGMENT
   VAR       DB -1, -10, -100, 27H, 0AH, 47H
     N       EQU $-VAR
@@ -104,7 +104,7 @@ RECMP:      MOV AL, VAR[SI]
 ### 接口技术
 利用 DOS 系统功能调用，从键盘输入一串字符，分别统计字母、数字和其他 字符的个数，并输出显示统计结果。
 
-```avrasm
+```x86asm
 DATA       SEGMENT 
 MAXSTRING  DB   100 
 INACT      DB   DUP(0)   
@@ -276,7 +276,7 @@ int main()
 ```
 接着尝试将C语言代码逐句（并不一定顺序全都相同，比如代码模块顺序就不同了）转换成X86汇编。
 
-```avrasm
+```x86asm
 DATA        SEGMENT
 ;int array[] = {28, 44, 22, 7, 42, -15, 35, 6, 43, 20};
 ARR         DW     28, 44, 22, 7, 42, -15, 35, 6, 43, 20
