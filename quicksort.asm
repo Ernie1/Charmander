@@ -21,7 +21,7 @@ code segment
     start:
 
         ;INITIALIZE DATA SEGMENT.
-        mov  ax, @data
+        mov  ax, data
         mov  ds, ax
 
         ;CALL QUICKSORT(A, 0, A.LENGTH-1).
@@ -90,81 +90,74 @@ code segment
 
         partition proc
 
-            ;GET X = ARR[ R ].
-            mov  si, offset arr
-            mov  ax, r
-            shl  ax, 1                  ;R * 2, BECAUSE EVERY COUNTER IS 2 BYTES.
-            add  si, ax
-            mov  ax, [ si ]       
-            mov  x,  ax                 ;X = ARR[ R ].
+            ;p   q     r
+;low pivot high
+;bx  ax    cx
 
-            ;GET I = P - 1.
-            mov  ax, p
-            mov  i,  ax
-            dec  i
+mov bx, p
+mov cx, r
 
-            ;INITIALISE J WITH P.
-            mov  ax, p
-            mov  j,  ax
+;mov q, ax; int pivot = low;
+;q pivot
 
-            ;LOOP J FROM P TO R-1.
-            for_j:
+while1:
+cmp bx, cx;     while (low < hight)
+jl while2
+ret ;     return pivot;
 
-                ;GET ARR[ J ].
-                mov  si, offset arr
-                mov  ax, j
-                shl  ax, 1              ;J * 2, BECAUSE EVERY COUNTER IS 2 BYTES.
-                add  si, ax
-                mov  ax, [ si ]         ;AX = ARR[ J ]
+while2:
+cmp ax, cx  ;while (pivot < hight)
+jge while3
 
-                ;COMPARE A[ J ] WITH X.
-                cmp  ax, x
-                jg   bigger             ;IF A[ J ] > X, NO SWAP
+mov si, ax  ;if (array[pivot] <= array[hight])
+shl si, 1
+mov dx, [ si ]
+mov si, cx
+shl si, 1
+cmp dx, [ si ]
+jg else2
+dec cx   ;hight--;
+jmp while2
 
-                ;GET I = I + 1.
-                inc  i
-                
-                ;GET ARR[ I ].
-                mov  di, offset arr
-                mov  cx, i
-                shl  cx, 1              ;I * 2, BECAUSE EVERY COUNTER IS 2 BYTES.
-                add  di, cx
-                mov  cx, [ di ]         ;CX = ARR[ I ].
+else2:
+mov si, ax
+shl si, 1
+mov dx, [ si ] ;array_swap(array, pivot, hight);
+mov si, cx
+shl si, 1
+xchg dx, [ si ]
+mov si, ax
+shl si, 1
+mov [ si ], dx 
+mov ax, cx  ;pivot = hight;
+;break;
 
-                ;EXCHANGE ARR[ I ] WITH ARR[ J ].
-                mov  [ di ], ax
-                mov  [ si ], cx
-            
-                ;GET NEXT J.
-                bigger:
+while3:
+cmp bx, ax  ;while (low < pivot)
+jge while1
 
-                    inc  j              ;J = J + 1.
-                    mov  ax, r
-                    cmp  j,  ax         ;COMPARE J WITH R.
-                    jl   for_j          ;IF J ≤ R-1 CONTINUE LOOP.
+mov si, bx  ;if (array[low] <= array[pivot])
+shl si, 1
+mov dx, [ si ]
+mov si, ax
+shl si, 1
+cmp dx, [ si ]
+jg else3
+inc bx   ;low++;
+jmp while3
 
-            ;GET ARR[ i+1 ].
-            inc  i
-            mov  si, offset arr
-            mov  ax, i
-            shl  ax, 1                  ;(I+1) * 2, BECAUSE EVERY COUNTER IS 2 BYTES.
-            add  si, ax
-            mov  ax, [ si ]             ;AX = ARR[ I+1 ].
-
-            ;GET ARR[ R ].
-            mov  di, offset arr
-            mov  cx, r
-            shl  cx, 1                  ;R * 2, BECAUSE EVERY COUNTER IS 2 BYTES.
-            add  di, cx
-            mov  cx, [ di ]             ;CX = ARR[ R ].
-
-            ;EXCHANGE ARR[ I+1 ] WITH ARR[ R ].
-            mov  [ di ], ax
-            mov  [ si ], cx  
-
-            ;RETURN I+1.
-            mov  ax, i
-            ret
+else3:
+mov si, bx ;array_swap(array, low, pivot);
+shl si, 1
+mov dx, [ si ]
+mov si, ax
+shl si, 1
+xchg dx, [ si ]
+mov si, bx
+shl si, 1
+mov [ si ], dx 
+mov ax, bx  ;pivot = low;
+jmp while1  ;break;
 
         partition endp
     
