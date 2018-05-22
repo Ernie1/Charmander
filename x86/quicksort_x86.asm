@@ -131,7 +131,7 @@ ELSE3:      ;swap(array, left, pivot)
             ;break
             JMP    WHILE1
 
-QUICKSORT ENDP
+QUICKSORT   ENDP
     
 CODE        ENDS
             
