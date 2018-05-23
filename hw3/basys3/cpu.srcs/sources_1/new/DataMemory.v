@@ -21,12 +21,12 @@
 
 
 module DataMemory(
-    input CLK,
-    input nRD,
-    input nWR,
-    input [31:0] DAddr,
-    input [31:0] DataIn,
-    output [31:0] DataOut
+        input CLK,
+        input nRD,
+        input nWR,
+        input [31:0] DAddr,
+        input [31:0] DataIn,
+        output [31:0] DataOut
     );
 
     reg [7:0] Data [0:63];

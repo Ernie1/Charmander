@@ -21,17 +21,17 @@
 
 
 module RegisterFile(
-    input CLK,
-    input RegWre,
-    input [4:0] rs,
-    input [4:0] rt,
-    input [4:0] rd,
-    input RegDst,
-    input DBDataSrc,
-    input [31:0] ALUresult,
-    input [31:0] DataMemoryDataOut,
-    output [31:0] ReadData1,
-    output [31:0] ReadData2
+        input CLK,
+        input RegWre,
+        input [4:0] rs,
+        input [4:0] rt,
+        input [4:0] rd,
+        input RegDst,
+        input DBDataSrc,
+        input [31:0] ALUresult,
+        input [31:0] DataMemoryDataOut,
+        output [31:0] ReadData1,
+        output [31:0] ReadData2
     );
 
     wire [31:0] WriteReg;

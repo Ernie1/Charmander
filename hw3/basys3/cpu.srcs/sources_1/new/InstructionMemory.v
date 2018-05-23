@@ -21,15 +21,15 @@
 
 
 module InstructionMemory(
-    input InsMemRW,
-    input [31:0] IAddr,
-    output  [5:0] op,
-    output [4:0] rs,
-    output [4:0] rt,
-    output [4:0] rd,
-    output [4:0] sa,
-    output [15:0] immediate,
-    output [25:0] address
+        input InsMemRW,
+        input [31:0] IAddr,
+        output  [5:0] op,
+        output [4:0] rs,
+        output [4:0] rt,
+        output [4:0] rd,
+        output [4:0] sa,
+        output [15:0] immediate,
+        output [25:0] address
     );
 
     reg [31:0] Instruction [0:79];

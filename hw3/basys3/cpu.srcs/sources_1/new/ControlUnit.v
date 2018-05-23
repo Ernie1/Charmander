@@ -21,20 +21,20 @@
 
 
 module ControlUnit(
-    input [5:0] op,
-    input zero,
-    output InsMemRW,
-    output  PCWre,
-    output ExtSel,
-    output DBDataSrc,
-    output nWR,
-    output nRD,
-    output ALUSrcB,
-    output ALUSrcA,
-    output [1:0] PCSrc,
-    output [2:0] ALUOp,
-    output RegWre,
-    output RegDst
+        input [5:0] op,
+        input zero,
+        output InsMemRW,
+        output  PCWre,
+        output ExtSel,
+        output DBDataSrc,
+        output nWR,
+        output nRD,
+        output ALUSrcB,
+        output ALUSrcA,
+        output [1:0] PCSrc,
+        output [2:0] ALUOp,
+        output RegWre,
+        output RegDst
     );
     
     //Ð´Ö¸Áî´æ´¢Æ÷

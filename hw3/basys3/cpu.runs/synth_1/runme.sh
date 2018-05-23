@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD=Y:/ECOP/hw3/cpu/cpu.runs/synth_1
+HD_PWD=Y:/ECOP/hw3/basys3/cpu.runs/synth_1
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log SingleCycleCPU.vds -m64 -mode batch -messageDb vivado.pb -notrace -source SingleCycleCPU.tcl
+EAStep vivado -log Basys3.vds -m64 -mode batch -messageDb vivado.pb -notrace -source Basys3.tcl

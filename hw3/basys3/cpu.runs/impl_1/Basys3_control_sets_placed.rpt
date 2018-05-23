@@ -1,0 +1,90 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.3 (win64) Build 1368829 Mon Sep 28 20:06:43 MDT 2015
+| Date         : Thu May 24 02:00:45 2018
+| Host         : ZJQ29D1 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file Basys3_control_sets_placed.rpt
+| Design       : Basys3
+| Device       : xc7a35t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Flip-Flop Distribution
+3. Detailed Control Set Information
+
+1. Summary
+----------
+
++-------------------------------------------------------------------+-------+
+|                               Status                              | Count |
++-------------------------------------------------------------------+-------+
+| Number of unique control sets                                     |    37 |
+| Minimum Number of register sites lost to control set restrictions |    27 |
++-------------------------------------------------------------------+-------+
+
+
+2. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               2 |            2 |
+| No           | No                    | Yes                    |               2 |            1 |
+| No           | Yes                   | No                     |              18 |            5 |
+| Yes          | No                    | No                     |             512 |          221 |
+| Yes          | No                    | Yes                    |               7 |            5 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+3. Detailed Control Set Information
+-----------------------------------
+
++----------------+----------------------------------------+------------------------------------+------------------+----------------+
+|  Clock Signal  |              Enable Signal             |          Set/Reset Signal          | Slice Load Count | Bel Load Count |
++----------------+----------------------------------------+------------------------------------+------------------+----------------+
+|  W5_IBUF_BUFG  |                                        |                                    |                1 |              1 |
+|  clock_div/CLK |                                        |                                    |                1 |              1 |
+|  clock_div/CLK |                                        | singleCycleCPU/pc/Address_reg[7]_0 |                1 |              2 |
+|  trigger_BUFG  | singleCycleCPU/pc/PCWre                | singleCycleCPU/pc/Address_reg[7]_0 |                5 |              7 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[3][0][0]    |                                    |                3 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/E[0]                 |                                    |                6 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[39][0][0]   |                                    |                3 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[7][0]_4[0]  |                                    |                5 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[11][0][0]   |                                    |                1 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[59][0][0]   |                                    |                3 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[15][0][0]   |                                    |                2 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[55][0][0]   |                                    |                3 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[23][0][0]   |                                    |                1 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[51][0][0]   |                                    |                4 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[27][0][0]   |                                    |                1 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[31][0][0]   |                                    |                3 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[47][0][0]   |                                    |                1 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[35][0][0]   |                                    |                1 |              8 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[43][0][0]   |                                    |                2 |              8 |
+|  W5_IBUF_BUFG  |                                        | clock_div/clear                    |                5 |             18 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[8][0][0]    |                                    |               15 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[44][0][0]   |                                    |               11 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[32][0][0]   |                                    |               11 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[48][0][0]   |                                    |               10 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[28][0][0]   |                                    |               11 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[4][0][0]    |                                    |               12 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[24][0][0]   |                                    |                9 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[52][0][0]   |                                    |               12 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[20][0][0]   |                                    |               10 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[56][0][0]   |                                    |               13 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[12][0][0]   |                                    |                9 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[60][0][0]   |                                    |               13 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[0][0][0]    |                                    |                9 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[40][0][0]   |                                    |               16 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[36][0][0]   |                                    |               11 |             24 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[16][0]_1[0] |                                    |               10 |             32 |
+| ~trigger_BUFG  | singleCycleCPU/pc/Data_reg[63][1]      |                                    |               12 |             96 |
++----------------+----------------------------------------+------------------------------------+------------------+----------------+
+
+

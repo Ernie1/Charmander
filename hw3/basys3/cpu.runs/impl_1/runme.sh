@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD=Y:/ECOP/hw3/cpu/cpu.runs/impl_1
+HD_PWD=Y:/ECOP/hw3/basys3/cpu.runs/impl_1
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -41,7 +41,7 @@ EAStep()
 }
 
 # pre-commands:
-/bin/touch .init_design.begin.rst
-EAStep vivado -log SingleCycleCPU.vdi -applog -m64 -messageDb vivado.pb -mode batch -source SingleCycleCPU.tcl -notrace
+/bin/touch .write_bitstream.begin.rst
+EAStep vivado -log Basys3.vdi -applog -m64 -messageDb vivado.pb -mode batch -source Basys3.tcl -notrace
 
 

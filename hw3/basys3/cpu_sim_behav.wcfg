@@ -11,103 +11,45 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="184903850fs"></ZoomStartTime>
-      <ZoomEndTime time="205403851fs"></ZoomEndTime>
-      <Cursor1Time time="193304000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="96400002fs"></ZoomEndTime>
+      <Cursor1Time time="179867000fs"></Cursor1Time>
    </zoom_setting>
-   <WVObjectSize size="22" />
+   <WVObjectSize size="9" />
    <wvobject db_ref_id="1" fp_name="/cpu_sim/CLK" type="logic">
       <obj_property name="ElementShortName">CLK</obj_property>
       <obj_property name="ObjectShortName">CLK</obj_property>
    </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/op" type="array">
-      <obj_property name="ElementShortName">op[5:0]</obj_property>
-      <obj_property name="ObjectShortName">op[5:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/PCAddress" type="array">
+      <obj_property name="ElementShortName">PCAddress[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PCAddress[31:0]</obj_property>
    </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/rs" type="array">
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/nextPC" type="array">
+      <obj_property name="ElementShortName">nextPC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">nextPC[31:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/rs" type="array">
       <obj_property name="ElementShortName">rs[4:0]</obj_property>
       <obj_property name="ObjectShortName">rs[4:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/rt" type="array">
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/rt" type="array">
       <obj_property name="ElementShortName">rt[4:0]</obj_property>
       <obj_property name="ObjectShortName">rt[4:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/rd" type="array">
-      <obj_property name="ElementShortName">rd[4:0]</obj_property>
-      <obj_property name="ObjectShortName">rd[4:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/RegisterFileReadData1" type="array">
+      <obj_property name="ElementShortName">RegisterFileReadData1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">RegisterFileReadData1[31:0]</obj_property>
    </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/immediate" type="array">
-      <obj_property name="ElementShortName">immediate[15:0]</obj_property>
-      <obj_property name="ObjectShortName">immediate[15:0]</obj_property>
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/RegisterFileReadData2" type="array">
+      <obj_property name="ElementShortName">RegisterFileReadData2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">RegisterFileReadData2[31:0]</obj_property>
    </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/result" type="array">
-      <obj_property name="ElementShortName">result[31:0]</obj_property>
-      <obj_property name="ObjectShortName">result[31:0]</obj_property>
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/ALUResult" type="array">
+      <obj_property name="ElementShortName">ALUResult[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUResult[31:0]</obj_property>
    </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/PCWre" type="logic">
-      <obj_property name="ElementShortName">PCWre</obj_property>
-      <obj_property name="ObjectShortName">PCWre</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/ExtSel" type="logic">
-      <obj_property name="ElementShortName">ExtSel</obj_property>
-      <obj_property name="ObjectShortName">ExtSel</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/DBDataSrc" type="logic">
-      <obj_property name="ElementShortName">DBDataSrc</obj_property>
-      <obj_property name="ObjectShortName">DBDataSrc</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/nWR" type="logic">
-      <obj_property name="ElementShortName">nWR</obj_property>
-      <obj_property name="ObjectShortName">nWR</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/nRD" type="logic">
-      <obj_property name="ElementShortName">nRD</obj_property>
-      <obj_property name="ObjectShortName">nRD</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/ALUSrcB" type="logic">
-      <obj_property name="ElementShortName">ALUSrcB</obj_property>
-      <obj_property name="ObjectShortName">ALUSrcB</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/ALUSrcA" type="logic">
-      <obj_property name="ElementShortName">ALUSrcA</obj_property>
-      <obj_property name="ObjectShortName">ALUSrcA</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/PCSrc" type="array">
-      <obj_property name="ElementShortName">PCSrc[1:0]</obj_property>
-      <obj_property name="ObjectShortName">PCSrc[1:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/ALUOp" type="array">
-      <obj_property name="ElementShortName">ALUOp[2:0]</obj_property>
-      <obj_property name="ObjectShortName">ALUOp[2:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/RegWre" type="logic">
-      <obj_property name="ElementShortName">RegWre</obj_property>
-      <obj_property name="ObjectShortName">RegWre</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/RegDst" type="logic">
-      <obj_property name="ElementShortName">RegDst</obj_property>
-      <obj_property name="ObjectShortName">RegDst</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/alu/A" type="array">
-      <obj_property name="ElementShortName">A[31:0]</obj_property>
-      <obj_property name="ObjectShortName">A[31:0]</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/alu/B" type="array">
-      <obj_property name="ElementShortName">B[31:0]</obj_property>
-      <obj_property name="ObjectShortName">B[31:0]</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/pc/Address" type="array">
-      <obj_property name="ElementShortName">Address[31:0]</obj_property>
-      <obj_property name="ObjectShortName">Address[31:0]</obj_property>
-   </wvobject>
-   <wvobject db_ref_id="1" fp_name="/cpu_sim/cpu/dataMemory/DAddr" type="array">
-      <obj_property name="ElementShortName">DAddr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">DAddr[31:0]</obj_property>
+   <wvobject db_ref_id="1" fp_name="/cpu_sim/DataMemoryDataOut" type="array">
+      <obj_property name="ElementShortName">DataMemoryDataOut[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DataMemoryDataOut[31:0]</obj_property>
    </wvobject>
 </wave_config>

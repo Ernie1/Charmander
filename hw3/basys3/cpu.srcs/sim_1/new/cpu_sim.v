@@ -25,18 +25,16 @@ module cpu_sim(
     );
     
     reg CLK,Reset;
-    wire [5:0] op;
-    wire [31:0] OUT1,OUT2,pc,result;
+    wire [31:0] PCAddress;
+    wire [31:0] nextPC;
+    wire [4:0] rs;
+    wire [4:0] rt;
+    wire [31:0] RegisterFileReadData1;
+    wire [31:0] RegisterFileReadData2;
+    wire [31:0] ALUResult;
+    wire [31:0] DataMemoryDataOut;
 
-    SingleCycleCPU cpu(
-        .CLK(CLK),
-        .Reset(Reset),
-        .InstructionMemoryOp(op),
-        .RegisterFileReadData1(OUT1),
-        .RegisterFileReadData2(OUT2),
-        .PCAddress(pc),
-        .ALUResult(result)
-        );
+    SingleCycleCPU singleCycleCPU(CLK,Reset,PCAddress,nextPC,rs,rt,RegisterFileReadData1,RegisterFileReadData2,ALUResult,DataMemoryDataOut);
 
     always #5 CLK=~CLK;  // ÖÜÆÚÎª 10ns
 

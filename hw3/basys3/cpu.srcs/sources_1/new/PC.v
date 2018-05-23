@@ -21,29 +21,20 @@
 
 
 module PC(
-        input PCWre,
         input CLK,
         input Reset,
-        input [1:0] PCSrc,
-        input [31:0] immediate,
-        input [25:0] address,
+        input [31:0] nextPC,
+        input PCWre,
         output reg [31:0] Address
     );
     
+    initial Address<=0;
+
     always@(posedge CLK or negedge Reset)begin
         if(!Reset)
             Address<=0;
-        else if(PCWre)begin
-            case(PCSrc)
-                2'b00:Address<=Address+4;// pc<£­pc+4
-                2'b01:Address<=Address+4+(immediate*4);// pc<£­pc+4+immediate*4
-                2'b10:begin    //pc<£­{(pc+4)[31:28],addr[27:2],2{0}}
-                    Address<=Address+4;
-                     Address<={Address[31:28],address,2'b00};
-                 end
-                 default:Address<=0;
-            endcase
-        end
+        else if(PCWre)
+            Address<=nextPC;
     end
     
 endmodule
